@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://brmo4feq88vld"]
+
+[ext_resource type="Script" uid="uid://2qnmygtojyte" path="res://scripts/level/Level.gd" id="1_level"]
+[ext_resource type="PackedScene" uid="uid://dj3almufnssu" path="res://scenes/entities/Cat.tscn" id="2_cat"]
+[ext_resource type="PackedScene" uid="uid://1j3refsylmrq" path="res://scenes/entities/Platform.tscn" id="3_platform"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Spikes.tscn" id="4_spikes"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Goal.tscn" id="5_goal"]
+[ext_resource type="PackedScene" path="res://scenes/ui/Hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Checkpoint.tscn" id="7_check"]
+[ext_resource type="PackedScene" path="res://scenes/levels/LarryFight.tscn" id="8_next"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(16, 1800)
+
+[node name="BossLevel" type="Node2D" unique_id=808738704]
+texture_filter = 1
+script = ExtResource("1_level")
+lives = 12
+
+[node name="Background" type="ColorRect" parent="." unique_id=6948202]
+z_index = -10
+offset_left = -300.0
+offset_top = -1000.0
+offset_right = 4800.0
+offset_bottom = 800.0
+mouse_filter = 2
+color = Color(0.13, 0.09, 0.17, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=1564468918]
+position = Vector2(-8, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1345148777]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1796363015]
+position = Vector2(4438, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=1346109865]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="StartPlatform" parent="." unique_id=808676478 instance=ExtResource("3_platform")]
+position = Vector2(0, 224)
+platform_size = Vector2(529, 196)
+
+[node name="Tower1" parent="." unique_id=1714340959 instance=ExtResource("3_platform")]
+position = Vector2(529, -14)
+platform_size = Vector2(381, 434)
+
+[node name="PitFloor1" parent="." unique_id=1344187691 instance=ExtResource("3_platform")]
+position = Vector2(910, 117)
+platform_size = Vector2(224, 34)
+
+[node name="Shelf" parent="." unique_id=993164452 instance=ExtResource("3_platform")]
+position = Vector2(1134, -111)
+platform_size = Vector2(361, 531)
+
+[node name="Tower2" parent="." unique_id=817977495 instance=ExtResource("3_platform")]
+position = Vector2(1495, -349)
+platform_size = Vector2(271, 769)
+
+[node name="Lowland" parent="." unique_id=2037527409 instance=ExtResource("3_platform")]
+position = Vector2(1766, 107)
+platform_size = Vector2(431, 313)
+
+[node name="PitFloor2" parent="." unique_id=214140010 instance=ExtResource("3_platform")]
+position = Vector2(2197, 238)
+platform_size = Vector2(256, 34)
+
+[node name="Overhang" parent="." unique_id=286732749 instance=ExtResource("3_platform")]
+position = Vector2(2293, -22)
+platform_size = Vector2(160, 96)
+
+[node name="Pillar" parent="." unique_id=1874022588 instance=ExtResource("3_platform")]
+position = Vector2(2453, -22)
+platform_size = Vector2(352, 442)
+
+[node name="Tower3" parent="." unique_id=1852574246 instance=ExtResource("3_platform")]
+position = Vector2(2805, -261)
+platform_size = Vector2(279, 681)
+
+[node name="Plain" parent="." unique_id=931655063 instance=ExtResource("3_platform")]
+position = Vector2(3084, 229)
+platform_size = Vector2(431, 191)
+
+[node name="PitFloor3" parent="." unique_id=228050287 instance=ExtResource("3_platform")]
+position = Vector2(3515, 360)
+platform_size = Vector2(224, 32)
+
+[node name="Finish" parent="." unique_id=525752637 instance=ExtResource("3_platform")]
+position = Vector2(3739, 226)
+platform_size = Vector2(683, 194)
+
+[node name="StartSpikes" parent="." unique_id=1049104772 instance=ExtResource("4_spikes")]
+position = Vector2(337, 208)
+spike_width = 192.0
+
+[node name="PitSpikes1" parent="." unique_id=1185420431 instance=ExtResource("4_spikes")]
+position = Vector2(910, 101)
+spike_width = 224.0
+
+[node name="ShelfSpikes" parent="." unique_id=768622012 instance=ExtResource("4_spikes")]
+position = Vector2(1303, -127)
+spike_width = 192.0
+
+[node name="PitSpikes2" parent="." unique_id=1548628476 instance=ExtResource("4_spikes")]
+position = Vector2(2197, 222)
+
+[node name="PillarSpikes" parent="." unique_id=1585086801 instance=ExtResource("4_spikes")]
+position = Vector2(2613, -38)
+spike_width = 192.0
+
+[node name="PitSpikes3" parent="." unique_id=1858718037 instance=ExtResource("4_spikes")]
+position = Vector2(3515, 344)
+spike_width = 224.0
+
+[node name="Checkpoint1" parent="." unique_id=907158890 instance=ExtResource("7_check")]
+position = Vector2(1189, -111)
+
+[node name="Checkpoint2" parent="." unique_id=1659801069 instance=ExtResource("7_check")]
+position = Vector2(1703, -349)
+
+[node name="Checkpoint3" parent="." unique_id=1505314119 instance=ExtResource("7_check")]
+position = Vector2(2519, -22)
+
+[node name="Goal" parent="." unique_id=734432002 instance=ExtResource("5_goal")]
+position = Vector2(4310, 226)
+next_level = ExtResource("8_next")
+
+[node name="Cat" parent="." unique_id=1036963103 instance=ExtResource("2_cat")]
+position = Vector2(93, 224)
+
+[node name="Camera2D" type="Camera2D" parent="Cat" unique_id=1754857223]
+position = Vector2(-14, -40)
+offset = Vector2(80, -20)
+zoom = Vector2(1.75, 1.75)
+limit_left = -16
+limit_top = -460
+limit_right = 4454
+limit_bottom = 440
+
+[node name="Hud" parent="." unique_id=716764299 instance=ExtResource("6_hud")]

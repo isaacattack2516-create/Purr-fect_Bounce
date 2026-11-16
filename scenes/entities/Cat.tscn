@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dj3almufnssu"]
+
+[ext_resource type="Script" uid="uid://cnfqmhhtbytvy" path="res://scripts/player/Cat.gd" id="1_cat"]
+[ext_resource type="Texture2D" uid="uid://cp47yy3h0ggc5" path="res://Kitten Alive.svg" id="2_kitten"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cat"]
+size = Vector2(94.00865, 40)
+
+[node name="Cat" type="CharacterBody2D" unique_id=374632486]
+script = ExtResource("1_cat")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1898017227]
+texture_filter = 1
+position = Vector2(-14.58, -19.98)
+scale = Vector2(0.049275056, 0.075491324)
+texture = ExtResource("2_kitten")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1953104895]
+position = Vector2(-14.499999, -20)
+scale = Vector2(0.30848223, 0.99228895)
+shape = SubResource("RectangleShape2D_cat")

@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/entities/Checkpoint.gd" id="1_check"]
+[ext_resource type="Texture2D" path="res://FLag Goal.png" id="2_flag"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_check"]
+size = Vector2(24, 56)
+
+[node name="Checkpoint" type="Area2D"]
+script = ExtResource("1_check")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.55, 0.55, 0.55, 1)
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_flag")
+offset = Vector2(-8, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_check")

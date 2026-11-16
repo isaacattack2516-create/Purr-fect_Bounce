@@ -1,0 +1,99 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/level/Level.gd" id="1_level"]
+[ext_resource type="PackedScene" uid="uid://dj3almufnssu" path="res://scenes/entities/Cat.tscn" id="2_cat"]
+[ext_resource type="PackedScene" uid="uid://1j3refsylmrq" path="res://scenes/entities/Platform.tscn" id="3_platform"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Spikes.tscn" id="4_spikes"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Goal.tscn" id="5_goal"]
+[ext_resource type="PackedScene" path="res://scenes/ui/Hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://scenes/levels/Level4.tscn" id="8_next"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(16, 1800)
+
+[node name="Level3" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_level")
+
+[node name="Background" type="ColorRect" parent="."]
+z_index = -10
+offset_left = -300
+offset_top = -900
+offset_right = 2100
+offset_bottom = 700
+mouse_filter = 2
+color = Color(0.18, 0.2, 0.26, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-8, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1771, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="StartPlatform" parent="." instance=ExtResource("3_platform")]
+position = Vector2(0, 224)
+platform_size = Vector2(297, 96)
+
+[node name="PitFloor1" parent="." instance=ExtResource("3_platform")]
+position = Vector2(297, 351)
+platform_size = Vector2(192, 32)
+
+[node name="LowLedge" parent="." instance=ExtResource("3_platform")]
+position = Vector2(489, 119)
+platform_size = Vector2(219, 232)
+
+[node name="PitFloor2" parent="." instance=ExtResource("3_platform")]
+position = Vector2(708, 250)
+platform_size = Vector2(256, 34)
+
+[node name="Overhang" parent="." instance=ExtResource("3_platform")]
+position = Vector2(804, -10)
+platform_size = Vector2(160, 96)
+
+[node name="Pillar" parent="." instance=ExtResource("3_platform")]
+position = Vector2(964, -10)
+platform_size = Vector2(222, 294)
+
+[node name="PitFloor3" parent="." instance=ExtResource("3_platform")]
+position = Vector2(1186, 117)
+platform_size = Vector2(288, 32)
+
+[node name="TopLedge" parent="." instance=ExtResource("3_platform")]
+position = Vector2(1474, -118)
+platform_size = Vector2(281, 267)
+
+[node name="PitSpikes1" parent="." instance=ExtResource("4_spikes")]
+position = Vector2(297, 335)
+spike_width = 192
+
+[node name="PitSpikes2" parent="." instance=ExtResource("4_spikes")]
+position = Vector2(708, 234)
+spike_width = 256
+
+[node name="PitSpikes3" parent="." instance=ExtResource("4_spikes")]
+position = Vector2(1186, 101)
+spike_width = 288
+
+[node name="Goal" parent="." instance=ExtResource("5_goal")]
+position = Vector2(1698, -118)
+next_level = ExtResource("8_next")
+
+[node name="Cat" parent="." instance=ExtResource("2_cat")]
+position = Vector2(93, 224)
+
+[node name="Camera2D" type="Camera2D" parent="Cat"]
+position = Vector2(-14, -40)
+offset = Vector2(60, -20)
+zoom = Vector2(1.75, 1.75)
+limit_left = -16
+limit_top = -420
+limit_right = 1787
+limit_bottom = 400
+
+[node name="Hud" parent="." instance=ExtResource("6_hud")]

@@ -1,0 +1,193 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/level/Level.gd" id="1_level"]
+[ext_resource type="Script" path="res://scripts/boss/Larry.gd" id="2_larry"]
+[ext_resource type="PackedScene" uid="uid://dj3almufnssu" path="res://scenes/entities/Cat.tscn" id="3_cat"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Spikes.tscn" id="4_spikes"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Goal.tscn" id="5_goal"]
+[ext_resource type="PackedScene" path="res://scenes/ui/Hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://scenes/boss/Beam.tscn" id="7_beam"]
+[ext_resource type="Texture2D" path="res://art/larry/larry-idle.png" id="10_idle"]
+[ext_resource type="AudioStream" path="res://Living in the Dark (Evil Larry Version) - Myuu.mp3" id="12_music"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(658, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_start"]
+size = Vector2(110, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mid"]
+size = Vector2(106, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(16, 700)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_roof"]
+size = Vector2(700, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_face"]
+size = Vector2(180, 130)
+
+[node name="LarryFight" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_level")
+lives = 12
+
+[node name="Backdrop" type="Node2D" parent="."]
+
+[node name="Base" type="ColorRect" parent="Backdrop"]
+z_index = -10
+offset_right = 658.0
+offset_bottom = 370.0
+mouse_filter = 2
+color = Color(0.35, 0.15, 0.55, 1)
+
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 330)
+
+[node name="Tiles" type="ColorRect" parent="Floor"]
+offset_right = 658.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0.42, 0.42, 0.48, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(329, 20)
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="StartLedge" type="StaticBody2D" parent="."]
+position = Vector2(0, 276)
+
+[node name="Tiles" type="ColorRect" parent="StartLedge"]
+offset_right = 110.0
+offset_bottom = 54.0
+mouse_filter = 2
+color = Color(0.42, 0.42, 0.48, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartLedge"]
+position = Vector2(55, 27)
+shape = SubResource("RectangleShape2D_start")
+
+[node name="MidLedge" type="StaticBody2D" parent="."]
+position = Vector2(170, 276)
+
+[node name="Tiles" type="ColorRect" parent="MidLedge"]
+offset_right = 106.0
+offset_bottom = 54.0
+mouse_filter = 2
+color = Color(0.42, 0.42, 0.48, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MidLedge"]
+position = Vector2(53, 27)
+shape = SubResource("RectangleShape2D_mid")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-8, 185)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(666, 185)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Roof" type="StaticBody2D" parent="."]
+position = Vector2(329, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
+shape = SubResource("RectangleShape2D_roof")
+
+[node name="Spikes" parent="." instance=ExtResource("4_spikes")]
+position = Vector2(276, 314)
+spike_width = 192.0
+
+[node name="Larry" type="Node2D" parent="."]
+z_index = -1
+position = Vector2(590, 185)
+script = ExtResource("2_larry")
+
+[node name="Glow" type="Sprite2D" parent="Larry"]
+modulate = Color(9, 7, 1.5, 0.8)
+show_behind_parent = true
+texture_filter = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("10_idle")
+
+[node name="Art" type="Sprite2D" parent="Larry"]
+texture_filter = 2
+scale = Vector2(0.564, 0.564)
+texture = ExtResource("10_idle")
+
+[node name="Face" type="Area2D" parent="Larry"]
+position = Vector2(30, -10)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Larry/Face"]
+shape = SubResource("RectangleShape2D_face")
+
+[node name="BeamTop" parent="." instance=ExtResource("7_beam")]
+position = Vector2(0, 35)
+
+[node name="BeamMid" parent="." instance=ExtResource("7_beam")]
+position = Vector2(0, 160)
+
+[node name="BeamBottom" parent="." instance=ExtResource("7_beam")]
+position = Vector2(0, 285)
+
+[node name="Goal" parent="." instance=ExtResource("5_goal")]
+visible = false
+position = Vector2(222, 276)
+monitoring = false
+
+[node name="Cat" parent="." instance=ExtResource("3_cat")]
+position = Vector2(56, 276)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(329, 185)
+zoom = Vector2(1.75, 1.75)
+
+[node name="Hud" parent="." instance=ExtResource("6_hud")]
+
+[node name="Bar" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="Bar"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 12.0
+offset_right = 150.0
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "larry hp: 3"
+horizontal_alignment = 1
+
+[node name="Back" type="ColorRect" parent="Bar"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_top = 46.0
+offset_right = 90.0
+offset_bottom = 58.0
+grow_horizontal = 2
+color = Color(0.08, 0.03, 0.12, 1)
+
+[node name="Fill" type="ColorRect" parent="Bar"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.0
+offset_top = 46.0
+offset_right = 90.0
+offset_bottom = 58.0
+grow_horizontal = 2
+color = Color(0.95, 0.35, 0.55, 1)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_music")
+volume_db = -8.0
+autoplay = true

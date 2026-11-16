@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://up1ecs8c2oj2"]
+
+[ext_resource type="Script" uid="uid://2qnmygtojyte" path="res://scripts/level/Level.gd" id="1_level"]
+[ext_resource type="PackedScene" uid="uid://dj3almufnssu" path="res://scenes/entities/Cat.tscn" id="2_cat"]
+[ext_resource type="PackedScene" uid="uid://1j3refsylmrq" path="res://scenes/entities/Platform.tscn" id="3_platform"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Spikes.tscn" id="4_spikes"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Goal.tscn" id="5_goal"]
+[ext_resource type="PackedScene" path="res://scenes/ui/Hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://scenes/levels/Level2.tscn" id="8_next"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(16, 360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pit_floor"]
+size = Vector2(160, 8)
+
+[node name="Level1" type="Node2D" unique_id=599120615]
+texture_filter = 1
+script = ExtResource("1_level")
+
+[node name="Background" type="ColorRect" parent="." unique_id=2092621142]
+z_index = -10
+offset_left = -554.0
+offset_top = -252.0
+offset_right = 1433.0
+offset_bottom = 453.0
+mouse_filter = 2
+color = Color(0.19976169, 0.16052788, 0.27851635, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=1740288782]
+position = Vector2(-8, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1690673351]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=62887843]
+position = Vector2(648, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=1867905052]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="StartPlatform" parent="." unique_id=1598261804 instance=ExtResource("3_platform")]
+position = Vector2(0, 224)
+
+[node name="HighLedge" parent="." unique_id=1794472394 instance=ExtResource("3_platform")]
+position = Vector2(418, 97)
+platform_size = Vector2(224, 224)
+
+[node name="Spikes" parent="." unique_id=295277030 instance=ExtResource("4_spikes")]
+position = Vector2(256, 320)
+spike_width = 160.0
+
+[node name="PitFloor" type="StaticBody2D" parent="." unique_id=1766298122]
+position = Vector2(256, 352)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PitFloor" unique_id=172615996]
+position = Vector2(80, 4)
+shape = SubResource("RectangleShape2D_pit_floor")
+
+[node name="Goal" parent="." unique_id=1647003791 instance=ExtResource("5_goal")]
+position = Vector2(590, 97)
+next_level = ExtResource("8_next")
+
+[node name="Cat" parent="." unique_id=85570413 instance=ExtResource("2_cat")]
+position = Vector2(96, 224)
+
+[node name="Camera2D" type="Camera2D" parent="Cat" unique_id=916514134]
+position = Vector2(3, -23)
+offset = Vector2(231.37, -15.17)
+zoom = Vector2(1.75, 1.75)
+limit_left = -242
+limit_top = -123
+limit_right = 422
+limit_bottom = 399
+
+[node name="Hud" parent="." unique_id=1012450028 instance=ExtResource("6_hud")]

@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://b1siwnjhlco31"]
+
+[ext_resource type="Script" uid="uid://2qnmygtojyte" path="res://scripts/level/Level.gd" id="1_level"]
+[ext_resource type="PackedScene" uid="uid://dj3almufnssu" path="res://scenes/entities/Cat.tscn" id="2_cat"]
+[ext_resource type="PackedScene" uid="uid://1j3refsylmrq" path="res://scenes/entities/Platform.tscn" id="3_platform"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Spikes.tscn" id="4_spikes"]
+[ext_resource type="PackedScene" path="res://scenes/entities/Goal.tscn" id="5_goal"]
+[ext_resource type="PackedScene" path="res://scenes/ui/Hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" uid="uid://brmo4feq88vld" path="res://scenes/levels/BossLevel.tscn" id="8_next"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(16, 1800)
+
+[node name="Level4" type="Node2D" unique_id=1533815403]
+texture_filter = 1
+script = ExtResource("1_level")
+
+[node name="Background" type="ColorRect" parent="." unique_id=358600427]
+z_index = -10
+offset_left = -300.0
+offset_top = -900.0
+offset_right = 2500.0
+offset_bottom = 700.0
+mouse_filter = 2
+color = Color(0.26, 0.14, 0.24, 1)
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=1141001356]
+position = Vector2(-8, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=153886506]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=1799976696]
+position = Vector2(2231, -200)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=469750912]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="StartPlatform" parent="." unique_id=1240488569 instance=ExtResource("3_platform")]
+position = Vector2(0, 224)
+platform_size = Vector2(301, 94)
+
+[node name="PitFloor1" parent="." unique_id=1216377027 instance=ExtResource("3_platform")]
+position = Vector2(301, 355)
+platform_size = Vector2(224, 34)
+
+[node name="Middle" parent="." unique_id=1217370770 instance=ExtResource("3_platform")]
+position = Vector2(525, 220)
+platform_size = Vector2(297, 96)
+
+[node name="PitFloor2" parent="." unique_id=826258942 instance=ExtResource("3_platform")]
+position = Vector2(822, 351)
+platform_size = Vector2(256, 32)
+
+[node name="Shelf" parent="." unique_id=229886113 instance=ExtResource("3_platform")]
+position = Vector2(1078, 117)
+platform_size = Vector2(322, 234)
+
+[node name="Tower" parent="." unique_id=1876471725 instance=ExtResource("3_platform")]
+position = Vector2(1400, -127)
+platform_size = Vector2(253, 478)
+
+[node name="PitFloor3" parent="." unique_id=1160771186 instance=ExtResource("3_platform")]
+position = Vector2(1653, 4)
+platform_size = Vector2(224, 34)
+
+[node name="FinalLedge" parent="." unique_id=1571268386 instance=ExtResource("3_platform")]
+position = Vector2(1877, -121)
+platform_size = Vector2(349, 159)
+
+[node name="PitSpikes1" parent="." unique_id=1313756613 instance=ExtResource("4_spikes")]
+position = Vector2(301, 339)
+spike_width = 224.0
+
+[node name="PitSpikes2" parent="." unique_id=2054889226 instance=ExtResource("4_spikes")]
+position = Vector2(822, 335)
+
+[node name="ShelfSpikes" parent="." unique_id=1405165726 instance=ExtResource("4_spikes")]
+position = Vector2(1208, 101)
+spike_width = 192.0
+
+[node name="PitSpikes3" parent="." unique_id=1194552378 instance=ExtResource("4_spikes")]
+position = Vector2(1653, -12)
+spike_width = 224.0
+
+[node name="Goal" parent="." unique_id=2103723063 instance=ExtResource("5_goal")]
+position = Vector2(2146, -121)
+next_level = ExtResource("8_next")
+
+[node name="Cat" parent="." unique_id=436611707 instance=ExtResource("2_cat")]
+position = Vector2(93, 224)
+
+[node name="Camera2D" type="Camera2D" parent="Cat" unique_id=932848753]
+position = Vector2(-14, -40)
+offset = Vector2(60, -20)
+zoom = Vector2(1.75, 1.75)
+limit_left = -16
+limit_top = -440
+limit_right = 2247
+limit_bottom = 400
+
+[node name="Hud" parent="." unique_id=1843823711 instance=ExtResource("6_hud")]

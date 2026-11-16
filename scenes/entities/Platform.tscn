@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://1j3refsylmrq"]
+
+[ext_resource type="Script" uid="uid://mneg7tanwe5d" path="res://scripts/level/Platform.gd" id="1_platform"]
+[ext_resource type="Texture2D" uid="uid://bdy6da7l7b2s7" path="res://Grass-1.png.png" id="2_grass"]
+[ext_resource type="Texture2D" uid="uid://7d6c7nlpxvcu" path="res://Dirt.png" id="3_dirt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvcby"]
+size = Vector2(256, 96)
+
+[node name="Platform" type="StaticBody2D" unique_id=1180520472]
+script = ExtResource("1_platform")
+
+[node name="Grass" type="TextureRect" parent="." unique_id=1758071947]
+texture_filter = 1
+texture_repeat = 2
+offset_right = 256.0
+offset_bottom = 32.0
+mouse_filter = 2
+texture = ExtResource("2_grass")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Dirt" type="TextureRect" parent="." unique_id=1056825811]
+texture_filter = 1
+texture_repeat = 2
+offset_top = 32.0
+offset_right = 256.0
+offset_bottom = 96.0
+mouse_filter = 2
+texture = ExtResource("3_dirt")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1032464195]
+position = Vector2(128, 48)
+shape = SubResource("RectangleShape2D_wvcby")
